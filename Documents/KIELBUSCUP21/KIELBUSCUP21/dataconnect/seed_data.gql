@@ -1,0 +1,103 @@
+mutation CreateSeedData @transaction {
+  user_insertMany(data: [
+    {
+      id: "550e8400-e29b-41d4-a716-446655440001",
+      email: "alice@example.com",
+      displayName: "Alice"
+    },
+    {
+      id: "550e8400-e29b-41d4-a716-446655440002",
+      email: "bob@example.com",
+      displayName: "Bob"
+    },
+    {
+      id: "550e8400-e29b-41d4-a716-446655440003",
+      email: "charlie@example.com",
+      displayName: "Charlie"
+    }
+  ])
+  
+  goal_insertMany(data: [
+    {
+      id: "660e8400-e29b-41d4-a716-446655440001",
+      userId: "550e8400-e29b-41d4-a716-446655440001",
+      title: "Run a Marathon",
+      description: "Train for and complete a 26.2 mile race.",
+      status: "In Progress"
+    },
+    {
+      id: "660e8400-e29b-41d4-a716-446655440002",
+      userId: "550e8400-e29b-41d4-a716-446655440002",
+      title: "Learn Spanish",
+      description: "Reach conversational fluency.",
+      status: "Not Started"
+    },
+    {
+      id: "660e8400-e29b-41d4-a716-446655440003",
+      userId: "550e8400-e29b-41d4-a716-446655440003",
+      title: "Read 50 Books",
+      description: "Read 50 books in one year.",
+      status: "In Progress"
+    }
+  ])
+  
+  habit_insertMany(data: [
+    {
+      id: "770e8400-e29b-41d4-a716-446655440001",
+      goalId: "660e8400-e29b-41d4-a716-446655440001",
+      title: "Morning Jog",
+      frequency: "Daily",
+      icon: "🏃"
+    },
+    {
+      id: "770e8400-e29b-41d4-a716-446655440002",
+      goalId: "660e8400-e29b-41d4-a716-446655440002",
+      title: "Duolingo Lesson",
+      frequency: "Daily",
+      icon: "🇪🇸"
+    },
+    {
+      id: "770e8400-e29b-41d4-a716-446655440003",
+      goalId: "660e8400-e29b-41d4-a716-446655440003",
+      title: "Reading",
+      frequency: "Daily",
+      icon: "📚"
+    }
+  ])
+  
+  habitLog_insertMany(data: [
+    {
+      habitId: "770e8400-e29b-41d4-a716-446655440001",
+      completedAt: "2023-10-27T08:00:00Z",
+      note: "Ran 3 miles."
+    },
+    {
+      habitId: "770e8400-e29b-41d4-a716-446655440002",
+      completedAt: "2023-10-27T09:00:00Z",
+      note: "Finished unit 1."
+    },
+    {
+      habitId: "770e8400-e29b-41d4-a716-446655440003",
+      completedAt: "2023-10-27T20:00:00Z",
+      note: "Read 20 pages."
+    }
+  ])
+  
+  streak_insertMany(data: [
+    {
+      habitId: "770e8400-e29b-41d4-a716-446655440001",
+      currentCount: 5,
+      longestCount: 10
+    },
+    {
+      habitId: "770e8400-e29b-41d4-a716-446655440002",
+      currentCount: 2,
+      longestCount: 5
+    },
+    {
+      habitId: "770e8400-e29b-41d4-a716-446655440003",
+      currentCount: 12,
+      longestCount: 12
+    }
+  ])
+}

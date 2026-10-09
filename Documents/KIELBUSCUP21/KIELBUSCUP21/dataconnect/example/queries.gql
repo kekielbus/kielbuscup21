@@ -1,0 +1,99 @@
+mutation CreateUser @auth(level: USER) {
+  user_insert(data: { id_expr: "auth.uid", email: "user@example.com", displayName: "New User" })
+}
+
+mutation UpdateUser @auth(level: USER) {
+  user_update(key: { id_expr: "auth.uid" }, data: { displayName: "Updated Name" })
+}
+
+mutation DeleteUser @auth(level: USER) {
+  user_delete(key: { id_expr: "auth.uid" })
+}
+
+query GetUser @auth(level: USER) {
+  user(key: { id_expr: "auth.uid" }) { email displayName }
+}
+
+query ListUsers @auth(level: PUBLIC, insecureReason: "Public list of users for directory") {
+  users { email displayName }
+}
+
+mutation CreateGoal @auth(level: USER) {
+  goal_insert(data: { userId_expr: "auth.uid", title: "New Goal", description: "Goal description" })
+}
+
+mutation UpdateGoal @auth(level: USER) {
+  goal_update(key: { id: "00000000-0000-0000-0000-000000000000" }, data: { status: "COMPLETED" })
+}
+
+mutation DeleteGoal @auth(level: USER) {
+  goal_delete(key: { id: "00000000-0000-0000-0000-000000000000" })
+}
+
+query GetGoal @auth(level: USER) {
+  goal(id: "00000000-0000-0000-0000-000000000000") { title description }
+}
+
+query ListGoals @auth(level: USER) {
+  goals(where: { userId: { eq_expr: "auth.uid" } }) { title status }
+}
+
+mutation CreateHabit @auth(level: USER) {
+  habit_insert(data: { goalId: "00000000-0000-0000-0000-000000000000", title: "Daily Walk", frequency: "daily" })
+}
+
+mutation UpdateHabit @auth(level: USER) {
+  habit_update(key: { id: "00000000-0000-0000-0000-000000000000" }, data: { icon: "🏃" })
+}
+
+mutation DeleteHabit @auth(level: USER) {
+  habit_delete(key: { id: "00000000-0000-0000-0000-000000000000" })
+}
+
+query GetHabit @auth(level: USER) {
+  habit(id: "00000000-0000-0000-0000-000000000000") { title frequency }
+}
+
+query ListHabits @auth(level: USER) {
+  habits { title frequency }
+}
+
+mutation CreateHabitLog @auth(level: USER) {
+  habitLog_insert(data: { habitId: "00000000-0000-0000-0000-000000000000", completedAt_expr: "request.time" })
+}
+
+mutation UpdateHabitLog @auth(level: USER) {
+  habitLog_update(key: { id: "00000000-0000-0000-0000-000000000000" }, data: { note: "Felt great" })
+}
+
+mutation DeleteHabitLog @auth(level: USER) {
+  habitLog_delete(key: { id: "00000000-0000-0000-0000-000000000000" })
+}
+
+query GetHabitLog @auth(level: USER) {
+  habitLog(id: "00000000-0000-0000-0000-000000000000") { completedAt note }
+}
+
+query ListHabitLogs @auth(level: USER) {
+  habitLogs { completedAt note }
+}
+
+mutation CreateStreak @auth(level: USER) {
+  streak_insert(data: { habitId: "00000000-0000-0000-0000-000000000000", currentCount: 1, longestCount: 1 })
+}
+
+mutation UpdateStreak @auth(level: USER) {
+  streak_update(key: { id: "00000000-0000-0000-0000-000000000000" }, data: { currentCount: 2 })
+}
+
+mutation DeleteStreak @auth(level: USER) {
+  streak_delete(key: { id: "00000000-0000-0000-0000-000000000000" })
+}
+
+query GetStreak @auth(level: USER) {
+  streak(id: "00000000-0000-0000-0000-000000000000") { currentCount longestCount }
+}
+
+query ListStreaks @auth(level: USER) {
+  streaks { currentCount longestCount }
+}
