@@ -30,7 +30,7 @@ export async function createPlayer(playerData) {
   const player = {
     name,
     teamId: playerData.teamId || null,
-    lives: playerData.lives ?? 4,
+    lives: playerData.lives ?? 3,
     points: playerData.points ?? 0,
     eliminated: playerData.eliminated ?? false,
     isCaptain: playerData.isCaptain ?? false,
